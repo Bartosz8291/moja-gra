@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+    .options {
+        display: flex;
+        justify-content: center;
+    }
+    .option {
+        margin: 0 10px;
+        padding: 5px 10px;
+        border: 1px solid #333;
+        cursor: pointer;
+    }
+    .option:hover {
+        background-color: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+<h1>Quiz</h1>
+<div class="question" id="question1">
+    <h2>Pierwsze pytanie:</h2>
+    <p>Co to jest stolica Francji?</p>
+    <div class="options">
+        <div class="option" onclick="checkAnswer(1, 'Paris')">Paris</div>
+        <div class="option" onclick="checkAnswer(1, 'London')">London</div>
+        <div class="option" onclick="checkAnswer(1, 'Berlin')">Berlin</div>
+    </div>
+</div>
+<div class="question" id="question2">
+    <h2>Drugie pytanie:</h2>
+    <p>Ile wynosi 2 + 2?</p>
+    <div class="options">
+        <div class="option" onclick="checkAnswer(2, '3')">3</div>
+        <div class="option" onclick="checkAnswer(2, '4')">4</div>
+        <div class="option" onclick="checkAnswer(2, '5')">5</div>
+    </div>
+</div>
+<div class="question" id="question3">
+    <h2>Trzecie pytanie:</h2>
+    <p>Kto był pierwszym prezydentem USA?</p>
+    <div class="options">
+        <div class="option" onclick="checkAnswer(3, 'George Washington')">George Washington</div>
+        <div class="option" onclick="checkAnswer(3, 'Thomas Jefferson')">Thomas Jefferson</div>
+        <div class="option" onclick="checkAnswer(3, 'Abraham Lincoln')">Abraham Lincoln</div>
+    </div>
+</div>
+<div id="result"></div>
+
+<script>
+let score = 0;
+
+function checkAnswer(questionNumber, correctAnswer) {
+    const selectedOption = event.target.innerText;
+    if (selectedOption === correctAnswer) {
+        score++;
+        document.getElementById('result').innerText = "Odpowiedź na pytanie " + questionNumber + " jest prawidłowa!";
+    } else {
+        document.getElementById('result').innerText = "Odpowiedź na pytanie " + questionNumber + " jest niepoprawna. Prawidłowa odpowiedź to: " + correctAnswer;
+    }
+    document.getElementById('question' + questionNumber).style.display = 'none';
+    if (questionNumber < 3) {
+        document.getElementById('question' + (questionNumber + 1)).style.display = 'block';
+    } else {
+        document.getElementById('result').innerText += "\nTwój wynik to: " + score + "/3";
+    }
+}
+</script>
+</body>
+</html>
